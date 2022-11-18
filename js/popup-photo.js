@@ -36,7 +36,6 @@ const hideBigPictureContainer = () => {
 };
 
 
-
 function onEscKey(evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
