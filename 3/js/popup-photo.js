@@ -1,19 +1,19 @@
-import {isEscapeKey} from './util.js';
+//import {isEscapeKey} from './util.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
 const socialCommentCount = document.querySelector('.social__comment-count');
 const socialComments = document.querySelector('.social__comments');
 const commentsLoader = document.querySelector('.comments-loader');
 const body = document.querySelector('body');
-//const cancelButton = document.querySelector('.big-picture__cancel');
+const cancelButton = document.querySelector('.big-picture__cancel');
 
-const commentItem = ({avatar, name, massage}) => {
+const commentItem = ({avatar, name, message}) => {
   const comment = document.createElement('li');
   comment.innerHTML = '<img class="social__picture" src="" alt="" width="35" height="35"><p class="social__text"></p>';
-  comment.classList.add('socil__comment');
+  comment.classList.add('social__comment');
   comment.querySelector('.social__picture').src = avatar;
   comment.querySelector('.social__picture').alt = name;
-  comment.querySelector('.social__picture').textContent = massage;
+  comment.querySelector('.social__text').textContent = message;
   return comment;
 };
 
@@ -30,24 +30,28 @@ const displayComments = (comments) => {
 };
 
 const hideBigPictureContainer = () => {
-  bigPictureContainer.classList.add('hide');
+  bigPictureContainer.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscKey);
 };
 
-function onEscKey (evt) {
-  if (isEscapeKey(evt)) {
+
+function onEscKey(evt) {
+  if (evt.key === 'Escape') {
     evt.preventDefault();
     hideBigPictureContainer();
   }
 }
 
-/*const onCancelButtonClick = () => {
+const onCancelButtonClick = () => {
   hideBigPictureContainer();
-};*/
+};
+
+document.addEventListener('keydown', onCancelButtonClick);
+
 
 const createBigPicture = (photo) => {
-  bigPictureContainer.querySelector('.big-picture__img img').src = photo.url;
+  bigPictureContainer.querySelector('.big-picture__img img').src = photo.URL;
   bigPictureContainer.querySelector('.likes-count').textContent = photo.likes;
   bigPictureContainer.querySelector('.social__caption').textContent = photo.description;
   bigPictureContainer.querySelector('.comments-count').textContent = photo.comments.length;
@@ -64,6 +68,6 @@ const showBigPicture = (photo) => {
 
 };
 
-//cancelButton.addEventListner('click', onCancelButtonClick);
+cancelButton.addEventListener('click', onCancelButtonClick);
 
 export {showBigPicture};
