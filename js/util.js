@@ -16,4 +16,9 @@ function getRandomIntInclusive(a, b) {
 
 const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
-export {getRandomIntInclusive, getRandomArrayElement};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+//const isEnterKey = (evt) => evt.key === 'Enter';
+
+
+export {getRandomIntInclusive, getRandomArrayElement, isEscapeKey};
