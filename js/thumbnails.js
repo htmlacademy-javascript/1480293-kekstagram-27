@@ -1,4 +1,5 @@
 import {createPhotosDescription} from './data.js';
+import {showBigPicture} from './popup-photo.js';
 
 const photosContainer = document.querySelector('.pictures');
 //userDialog.classList.remove('hidden');
@@ -10,15 +11,18 @@ const similarPhotosTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const similarPhotosDescription = createPhotosDescription();
+const getsimilarPhotosDescription = createPhotosDescription();
 
 const similarListFragment = document.createDocumentFragment();
 
-similarPhotosDescription.forEach((photo) => {
+getsimilarPhotosDescription.forEach((photo) => {
   const photoElement = similarPhotosTemplate.cloneNode(true);
   photoElement.querySelector('.picture__likes').textContent = photo.likes;
   photoElement.querySelector('.picture__img').src = photo.URL;
   photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+  photoElement.addEventListener('click', () => {
+    showBigPicture(photo);
+  });
   similarListFragment.appendChild(photoElement);
 });
 
